@@ -23,13 +23,17 @@ const authenticate = (auth, obj) => {
 app.use(express.static(path.resolve(__dirname, "../../publish")));
 app.use(express.json());
 
-app.get("/", (_, res) => {
+app.get("/api", (_, res) => {
   res.json({ hello: "world" });
 });
-app.ws('/collaboration/:document', (ws, req) => {
+app.ws('/api/collaboration/:document', (ws, req) => {
   console.log("got",req.params.document )
   setupWSConnection(ws, req, { docName: req.params.document })
 })
+app.get("*", function (req, res) {
+  console.log(path.resolve(__dirname, "../publish"))
+  res.sendFile('index.html',{root: path.resolve(__dirname, "../../publish")});
+});
 app.listen(port, () => {
   console.log(`express server started on ${port}`);
 });
