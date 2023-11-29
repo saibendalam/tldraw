@@ -1,0 +1,22 @@
+{
+  "name": "tldraw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-ws": "^5.0.2",
+    "ws": "^8.14.2",
+    "y-websocket": "^1.5.0",
+    "y-websocket-auth": "^0.1.7"
+  }
+}
