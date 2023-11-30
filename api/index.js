@@ -20,7 +20,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const authenticate = (auth, obj) => {
   return true;
 };
-app.use(express.static(path.resolve(__dirname, "../../publish")));
+app.use(express.static(path.resolve(__dirname, "../publish")));
 app.use(express.json());
 
 app.get("/api", (_, res) => {
@@ -32,7 +32,7 @@ app.ws('/api/collaboration/:document', (ws, req) => {
 })
 app.get("*", function (req, res) {
   console.log(path.resolve(__dirname, "../publish"))
-  res.sendFile('index.html',{root: path.resolve(__dirname, "../../publish")});
+  res.sendFile('index.html',{root: path.resolve(__dirname, "../publish")});
 });
 app.listen(port, () => {
   console.log(`express server started on ${port}`);
