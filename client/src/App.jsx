@@ -7,7 +7,7 @@ import { useYjsStore } from './lib/useYjsStore'
 const HOST_URL =
 	import.meta.env.MODE === 'development'
 		? 'ws://172.17.13.161:1234/api/collaboration'
-		: 'ws://'+window.location.hostname+":"+window.location.port+'/api/collaboration'
+		: 'wss://'+window.location.hostname+":"+window.location.port+'/api/collaboration'
 
 function App() {
 	const store = useYjsStore({
