@@ -11,10 +11,15 @@ import path from "path"
 const { setupWSConnection} =pkg;
 const { app } = expressWs(express());
 const port = process.env.PORT || 3333;
-const wss =  new WebSocketServer({ server: app,path:"/" });
+const wss =  new WebSocketServer({ server: app,path:"/api/collaboration/:document" });
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+const frontendMiddleware = (req, res) => {
+  if (req.header('sec-websocket-version') === undefined) {
+    res.sendFile('index.html',{root: path.resolve(__dirname, "../publish")});
+  }
+}
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const authenticate = (auth, obj) => {
@@ -30,10 +35,7 @@ app.ws('/api/collaboration/:document', (ws, req) => {
   console.log("got",req.params.document )
   setupWSConnection(ws, req, { docName: req.params.document })
 })
-app.get("*", function (req, res) {
-  console.log(path.resolve(__dirname, "../publish"))
-  res.sendFile('index.html',{root: path.resolve(__dirname, "../publish")});
-});
+app.use(frontendMiddleware)
 app.listen(port, () => {
   console.log(`express server started on ${port}`);
 });
